@@ -1,0 +1,11 @@
+---
+- name: check bootstrap_peers
+  fail:
+    msg: Undefined variable bootstrap_peers
+  when: bootstrap_peers is undefined
+
+- name: check ip_range
+  fail:
+    msg: Undefined variable ip_range
+  when: ip_range is undefined
+  

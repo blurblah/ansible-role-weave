@@ -1,0 +1,27 @@
+---
+- include: check_system.yml
+- include: check_variables.yml
+
+- name: Install weave net
+  shell: |
+    curl -L git.io/weave -o /usr/local/bin/weave
+    chmod +x /usr/local/bin/weave
+
+- name: Create default environment file
+  template:
+    src: default_environment.j2
+    dest: /etc/default/weave
+    mode: 0644
+
+- name: Create systemd configuration file
+  template:
+    src: weave.service.j2
+    dest: /etc/systemd/system/weave.service
+    mode: 0644
+
+- name: Start and enable weave service
+  systemd:
+    name: weave.service
+    state: restarted
+    daemon_reload: yes
+    enabled: yes

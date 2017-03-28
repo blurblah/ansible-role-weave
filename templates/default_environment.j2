@@ -1,0 +1,4 @@
+PEER_NAME="::{{ ansible_host.split('.')[-1] }}"
+SEED="{% for peer in bootstrap_peers %}{{ peer.seed }}{% if not loop.last %},{% endif %}{% endfor %}"
+IP_RANGE="{{ ip_range }}"
+PEERS="{% for peer in bootstrap_peers %}{{ peer.host }}{% if not loop.last %} {% endif %}{% endfor %}"
